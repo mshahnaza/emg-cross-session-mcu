@@ -1,0 +1,7 @@
+*.mat
+*.zip
+*.npz
+model_data.h
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
