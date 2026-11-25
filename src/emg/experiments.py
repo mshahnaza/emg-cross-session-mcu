@@ -56,7 +56,9 @@ def renorm_table(data, subject, standard, models, pool):
                 R = (cal - none) / (full - none) if full != none else np.nan
                 rows.append([s, name, b, none, cal, full, R])
     df = pd.DataFrame(rows, columns=['Session', 'Model', 'Budget (reps)', 'No calibration', 'Re-normalization', 'Retrained', 'R'])
-    summary = df.groupby(['Model', 'Budget (reps)'])[['No calibration', 'Re-normalization', 'Retrained', 'R']].mean().round(2)
+    summary = df.groupby(['Model', 'Budget (reps)'])[['No calibration', 'Re-normalization', 'Retrained']].mean()
+    summary['R'] = (summary['Re-normalization'] - summary['No calibration']) / (summary['Retrained'] - summary['No calibration'])
+    summary = summary.round(2)
     return df, summary
 
 
